@@ -59,14 +59,14 @@ class EncryptionZoneInfo(ct.Structure):
 class FileInfo(ct.Structure):
     _fields_ = [('kind', ct.c_int8),
                 ('name', ct.c_char_p),
-                ('last_mod', ct.c_int64),  #time_t, could be 32bit
+                ('last_mod', ct.c_int64),  # time_t, could be 32bit
                 ('size', ct.c_int64),
                 ('replication', ct.c_short),
                 ('block_size', ct.c_int64),
                 ('owner', ct.c_char_p),
                 ('group', ct.c_char_p),
-                ('permissions', ct.c_short),  #view as octal
-                ('last_access', ct.c_int64),  #time_t, could be 32bit
+                ('permissions', ct.c_short),  # view as octal
+                ('last_access', ct.c_int64),  # time_t, could be 32bit
                 ('encryption_info', ct.POINTER(EncryptionFileInfo))]
 
 hdfsGetPathInfo = _lib.hdfsGetPathInfo
@@ -405,22 +405,22 @@ param dstFS The handle to destination filesystem.
 param dst The path of destination file.
 return Returns 0 on success, -1 on error."""
 
-hdfsConcat = _lib.hdfsConcat
-hdfsConcat.argtypes = [ct.POINTER(hdfsFS), ct.c_char_p,
-                       ct.POINTER(ct.c_char_p)]
-hdfsConcat.__doc__ = """Concatenate (move) the blocks in a list of source
-files into a single file deleting the source files.  
-
-Source files must all have the same block size and replication and all
-but the last source file must be an integer number of full
-blocks long.  The source files are deleted on successful
-completion.
-
-param fs The configured filesystem handle.
-param trg The path of target (resulting) file
-param scrs A list of paths to source files
-return Returns 0 on success, -1 on error.
-"""
+# hdfsConcat = _lib.hdfsConcat
+# hdfsConcat.argtypes = [ct.POINTER(hdfsFS), ct.c_char_p,
+#                        ct.POINTER(ct.c_char_p)]
+# hdfsConcat.__doc__ = """Concatenate (move) the blocks in a list of source
+# files into a single file deleting the source files.  
+# 
+# Source files must all have the same block size and replication and all
+# but the last source file must be an integer number of full
+# blocks long.  The source files are deleted on successful
+# completion.
+# 
+# param fs The configured filesystem handle.
+# param trg The path of target (resulting) file
+# param scrs A list of paths to source files
+# return Returns 0 on success, -1 on error.
+# """
 
 hdfsDelete = _lib.hdfsDelete
 hdfsDelete.argtypes = [ct.POINTER(hdfsFS), ct.c_char_p, ct.c_int]
@@ -473,17 +473,18 @@ param fs The configured filesystem handle.
 param path The path of the directory.
 return Returns 0 on success, -1 on error."""
 
-hdfsCreateDirectoryEx = _lib.hdfsCreateDirectoryEx
-hdfsCreateDirectoryEx.argtypes = [ct.POINTER(hdfsFS), ct.c_char_p,
-                                  ct.c_short, ct.c_int]
-hdfsCreateDirectoryEx.restype = ct.c_int
-hdfsCreateDirectoryEx.__doc__ = """Make the given file with extended options
 
-param fs The configured filesystem handle.
-param path The path of the directory.
-param mode The permissions for created file and directories.
-param createParents Controls whether to create all non-existent parent directories or not
-return Returns 0 on success, -1 on error."""
+# hdfsCreateDirectoryEx = _lib.hdfsCreateDirectoryEx
+# hdfsCreateDirectoryEx.argtypes = [ct.POINTER(hdfsFS), ct.c_char_p,
+#                                   ct.c_short, ct.c_int]
+# hdfsCreateDirectoryEx.restype = ct.c_int
+# hdfsCreateDirectoryEx.__doc__ = """Make the given file with extended options
+#
+# param fs The configured filesystem handle.
+# param path The path of the directory.
+# param mode The permissions for created file and directories.
+# param createParents Controls whether to create all non-existent parent directories or not
+# return Returns 0 on success, -1 on error."""
 
 
 hdfsSetReplication = _lib.hdfsSetReplication
